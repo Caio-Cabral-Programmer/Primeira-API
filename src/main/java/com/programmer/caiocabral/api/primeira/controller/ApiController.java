@@ -1,14 +1,41 @@
 package com.programmer.caiocabral.api.primeira.controller;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-@RestController
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+
+@RestController // Porta de entrada da aplicação
+@RequestMapping(path = "/tasks")
 public class ApiController {
 
+    private List<String> tasks = new ArrayList<>();
+
+    private ObjectMapper objectMapper;
+
+    public ApiController(ObjectMapper objectMapper) {
+        this.objectMapper = objectMapper;
+    }
+
+
     @GetMapping
-    public ResponseEntity<String> HelloWorld() {
-        return ResponseEntity.ok("Hello, World!");
+    public ResponseEntity<String> listTasks() throws JsonProcessingException {
+        return ResponseEntity.ok(objectMapper.writeValueAsString(tasks)); // objectMapper converte a lista de tarefas em uma string JSON e retorna como resposta
+    }
+
+    @PostMapping
+    public ResponseEntity<Void> createTask(@RequestBody String task) {
+        tasks.add(task);
+        return ResponseEntity.ok().build();
+    }
+
+    @DeleteMapping
+    public ResponseEntity<Void> clearTasks() {
+        tasks = new ArrayList<>();
+        return ResponseEntity.ok().build();
     }
 }
