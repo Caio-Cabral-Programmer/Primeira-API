@@ -12,3 +12,10 @@ public class Application {
 	}
 
 }
+
+// Isso é tudo! O Spring Boot configura automaticamente:
+// - Servidor web embutido (Tomcat)
+// - DispatcherServlet
+// - Configurações padrão
+// - Componentes e beans
+// - Muito mais...

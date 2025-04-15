@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-@RestController // Porta de entrada da aplicação
+@RestController // Porta de entrada da API. É aqui que o Spring vai interpretar as requisições HTTP e as respostas HTTP. Aqui será feito o roteamento das requisições HTTP.
 @RequestMapping(path = "/tasks")
 public class ApiController {
 
